@@ -1,0 +1,2339 @@
+start:2198583326334 ns, threshold:10 ms (10000000 ns)
+execname:mt_s1_hold  pid:51139  mutex:ffffffffc10ed120
+hold_time:51 ms, waiter_count:3
+execname:mt_s1_hold  pid:51139  mutex:ffffffffc10ed120
+hold_time:51 ms, waiter_count:3
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s1_hold  pid:51139  mutex:ffffffffc10ed120
+lock_entry:2712755944  lock_exit:2712756876  unlock_entry:2764687669  unlock_exit:2764692897
+lock_acquire_time:932 ns  critical_section_time:51930793 ns  mutex_release_time:5228 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea08a
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s1_wait  pid:51140  mutex:ffffffffc10ed120
+wait_time:44 ms, waiter_count:2
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea027
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s1_wait  pid:51140  mutex:ffffffffc10ed120
+lock_entry:2720264428  lock_exit:2764694669  unlock_entry:2765271206  unlock_exit:2765271947
+lock_acquire_time:44430241 ns  critical_section_time:576537 ns  mutex_release_time:741 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea03f
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/2:0  pid:50931  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:14
+execname:kworker/2:0  pid:50931  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:14
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/2:0  pid:50931  mutex:ff1b1712471f3950
+lock_entry:2712254824  lock_exit:2712255675  unlock_entry:2813538992  unlock_exit:2813541896
+lock_acquire_time:851 ns  critical_section_time:101283317 ns  mutex_release_time:2904 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/2:0  pid:50931  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:15
+execname:kworker/2:0  pid:50931  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:15
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/2:0  pid:50931  mutex:ff1b1712471f3950
+lock_entry:2813556528  lock_exit:2813557349  unlock_entry:2914996735  unlock_exit:2914999139
+lock_acquire_time:821 ns  critical_section_time:101439386 ns  mutex_release_time:2404 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/2:0  pid:50931  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:16
+execname:kworker/2:0  pid:50931  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:16
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/2:0  pid:50931  mutex:ff1b1712471f3950
+lock_entry:2915008563  lock_exit:2915009364  unlock_entry:3016487209  unlock_exit:3016488961
+lock_acquire_time:801 ns  critical_section_time:101477845 ns  mutex_release_time:1752 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:17
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:17
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+lock_entry:3080747051  lock_exit:3080748012  unlock_entry:3182007001  unlock_exit:3182009435
+lock_acquire_time:961 ns  critical_section_time:101258989 ns  mutex_release_time:2434 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s2_hold  pid:51145  mutex:ffffffffc10ed100
+hold_time:110 ms, waiter_count:3
+execname:mt_s2_hold  pid:51145  mutex:ffffffffc10ed100
+hold_time:110 ms, waiter_count:3
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s2_hold  pid:51145  mutex:ffffffffc10ed100
+lock_entry:3081998894  lock_exit:3082000467  unlock_entry:3192691153  unlock_exit:3192698495
+lock_acquire_time:1573 ns  critical_section_time:110690686 ns  mutex_release_time:7342 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea13c
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s2_wait  pid:51146  mutex:ffffffffc10ed100
+wait_time:103 ms, waiter_count:2
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea0d7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s2_wait  pid:51146  mutex:ffffffffc10ed100
+lock_entry:3089287250  lock_exit:3192703342  unlock_entry:3193979633  unlock_exit:3193980364
+lock_acquire_time:103416092 ns  critical_section_time:1276291 ns  mutex_release_time:731 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea0ef
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:18
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:18
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+lock_entry:3182019410  lock_exit:3182020101  unlock_entry:3283250445  unlock_exit:3283252719
+lock_acquire_time:691 ns  critical_section_time:101230344 ns  mutex_release_time:2274 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:19
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:19
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+lock_entry:3283260832  lock_exit:3283261503  unlock_entry:3384554744  unlock_exit:3384556707
+lock_acquire_time:671 ns  critical_section_time:101293241 ns  mutex_release_time:1963 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:20
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:20
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/3:13  pid:51091  mutex:ff1b1712471f3950
+lock_entry:3384563527  lock_exit:3384564258  unlock_entry:3485723022  unlock_exit:3485724755
+lock_acquire_time:731 ns  critical_section_time:101158764 ns  mutex_release_time:1733 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s3_hold  pid:51152  mutex:ffffffffc10ed0e0
+hold_time:87 ms, waiter_count:9
+execname:mt_s3_hold  pid:51152  mutex:ffffffffc10ed0e0
+hold_time:87 ms, waiter_count:9
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s3_hold  pid:51152  mutex:ffffffffc10ed0e0
+lock_entry:3496495971  lock_exit:3496497483  unlock_entry:3583692688  unlock_exit:3583697835
+lock_acquire_time:1512 ns  critical_section_time:87195205 ns  mutex_release_time:5147 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea1fc
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s3_w1  pid:51154  mutex:ffffffffc10ed0e0
+wait_time:76 ms, waiter_count:8
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea18c
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s3_w0  pid:51153  mutex:ffffffffc10ed0e0
+wait_time:83 ms, waiter_count:7
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea18c
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s3_w1  pid:51154  mutex:ffffffffc10ed0e0
+lock_entry:3507688364  lock_exit:3583699658  unlock_entry:3591679186  unlock_exit:3591681450
+lock_acquire_time:76011294 ns  critical_section_time:7979528 ns  mutex_release_time:2264 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea1b0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:21
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:21
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:3496466616  lock_exit:3496467597  unlock_entry:3596638605  unlock_exit:3596641389
+lock_acquire_time:981 ns  critical_section_time:100171008 ns  mutex_release_time:2784 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s3_w0  pid:51153  mutex:ffffffffc10ed0e0
+lock_entry:3507694343  lock_exit:3591682773  unlock_entry:3599679987  unlock_exit:3599682190
+lock_acquire_time:83988430 ns  critical_section_time:7997214 ns  mutex_release_time:2203 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea1b0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s3_w2  pid:51155  mutex:ffffffffc10ed0e0
+wait_time:91 ms, waiter_count:6
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea18c
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s3_w2  pid:51155  mutex:ffffffffc10ed0e0
+lock_entry:3508231439  lock_exit:3599683452  unlock_entry:3607680337  unlock_exit:3607684323
+lock_acquire_time:91452013 ns  critical_section_time:7996885 ns  mutex_release_time:3986 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea1b0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s3_w3  pid:51156  mutex:ffffffffc10ed0e0
+wait_time:97 ms, waiter_count:5
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea18c
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s3_w3  pid:51156  mutex:ffffffffc10ed0e0
+lock_entry:3509902916  lock_exit:3607688399  unlock_entry:3614681741  unlock_exit:3614682332
+lock_acquire_time:97785483 ns  critical_section_time:6993342 ns  mutex_release_time:591 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea1b0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:22
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:22
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:3596653758  lock_exit:3596654580  unlock_entry:3696658179  unlock_exit:3696660753
+lock_acquire_time:822 ns  critical_section_time:100003599 ns  mutex_release_time:2574 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:23
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:23
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:3696679222  lock_exit:3696680043  unlock_entry:3796493180  unlock_exit:3796495984
+lock_acquire_time:821 ns  critical_section_time:99813137 ns  mutex_release_time:2804 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:24
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:24
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:3796505510  lock_exit:3796506340  unlock_entry:3896383165  unlock_exit:3896385649
+lock_acquire_time:830 ns  critical_section_time:99876825 ns  mutex_release_time:2484 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:25
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:25
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+lock_entry:3928500523  lock_exit:3928501735  unlock_entry:4029743356  unlock_exit:4029746270
+lock_acquire_time:1212 ns  critical_section_time:101241621 ns  mutex_release_time:2914 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:26
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:26
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+lock_entry:4029757367  lock_exit:4029758038  unlock_entry:4130958326  unlock_exit:4130960329
+lock_acquire_time:671 ns  critical_section_time:101200288 ns  mutex_release_time:2003 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:27
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:27
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+lock_entry:4130967130  lock_exit:4130967771  unlock_entry:4232210635  unlock_exit:4232212428
+lock_acquire_time:641 ns  critical_section_time:101242864 ns  mutex_release_time:1793 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:3
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:3
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4240606733  lock_exit:4240607704  unlock_entry:4262703917  unlock_exit:4262714603
+lock_acquire_time:971 ns  critical_section_time:22096213 ns  mutex_release_time:10686 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:22 ms, waiter_count:2
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:21 ms, waiter_count:4
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:21 ms, waiter_count:4
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4240630909  lock_exit:4262717608  unlock_entry:4284685444  unlock_exit:4284690031
+lock_acquire_time:22086699 ns  critical_section_time:21967836 ns  mutex_release_time:4587 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:3
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:5
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:5
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4265679177  lock_exit:4284691082  unlock_entry:4307684083  unlock_exit:4307688389
+lock_acquire_time:19011905 ns  critical_section_time:22993001 ns  mutex_release_time:4306 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:4
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:6
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:6
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4288678427  lock_exit:4307689582  unlock_entry:4330683764  unlock_exit:4330687680
+lock_acquire_time:19011155 ns  critical_section_time:22994182 ns  mutex_release_time:3916 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:5
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:29
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:29
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:4240573451  lock_exit:4240574212  unlock_entry:4340523319  unlock_exit:4340526563
+lock_acquire_time:761 ns  critical_section_time:99949107 ns  mutex_release_time:3244 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:7
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:7
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4311677988  lock_exit:4330688992  unlock_entry:4353683084  unlock_exit:4353686890
+lock_acquire_time:19011004 ns  critical_section_time:22994092 ns  mutex_release_time:3806 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:6
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:8
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:8
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4334679522  lock_exit:4353688132  unlock_entry:4376684097  unlock_exit:4376688243
+lock_acquire_time:19008610 ns  critical_section_time:22995965 ns  mutex_release_time:4146 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:7
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:9
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:9
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4357677179  lock_exit:4376689435  unlock_entry:4399682846  unlock_exit:4399686612
+lock_acquire_time:19012256 ns  critical_section_time:22993411 ns  mutex_release_time:3766 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:8
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:10
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:10
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4380678533  lock_exit:4399687974  unlock_entry:4422683649  unlock_exit:4422687685
+lock_acquire_time:19009441 ns  critical_section_time:22995675 ns  mutex_release_time:4036 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:9
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:30
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:30
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:4340539644  lock_exit:4340540535  unlock_entry:4440617277  unlock_exit:4440620131
+lock_acquire_time:891 ns  critical_section_time:100076742 ns  mutex_release_time:2854 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:11
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:11
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4403677983  lock_exit:4422689087  unlock_entry:4445682338  unlock_exit:4445685984
+lock_acquire_time:19011104 ns  critical_section_time:22993251 ns  mutex_release_time:3646 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:10
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:12
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:12
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4426679607  lock_exit:4445687346  unlock_entry:4468683060  unlock_exit:4468686926
+lock_acquire_time:19007739 ns  critical_section_time:22995714 ns  mutex_release_time:3866 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:11
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:13
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:13
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4449677896  lock_exit:4468688148  unlock_entry:4491681810  unlock_exit:4491685495
+lock_acquire_time:19010252 ns  critical_section_time:22993662 ns  mutex_release_time:3685 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:12
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:14
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:23 ms, waiter_count:14
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4472678468  lock_exit:4491686857  unlock_entry:4514688852  unlock_exit:4514694090
+lock_acquire_time:19008389 ns  critical_section_time:23001995 ns  mutex_release_time:5238 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:13
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:15
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:15
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4495678609  lock_exit:4514695252  unlock_entry:4537682143  unlock_exit:4537685829
+lock_acquire_time:19016643 ns  critical_section_time:22986891 ns  mutex_release_time:3686 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:14
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:31
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:31
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:4440630838  lock_exit:4440631700  unlock_entry:4540546794  unlock_exit:4540549478
+lock_acquire_time:862 ns  critical_section_time:99915094 ns  mutex_release_time:2684 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:16
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:16
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4518678651  lock_exit:4537687741  unlock_entry:4560682505  unlock_exit:4560687011
+lock_acquire_time:19009090 ns  critical_section_time:22994764 ns  mutex_release_time:4506 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:15
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:17
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:17
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4541678502  lock_exit:4560688093  unlock_entry:4583681885  unlock_exit:4583687213
+lock_acquire_time:19009591 ns  critical_section_time:22993792 ns  mutex_release_time:5328 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:16
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:18
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:18
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4564677912  lock_exit:4583689096  unlock_entry:4606684501  unlock_exit:4606688797
+lock_acquire_time:19011184 ns  critical_section_time:22995405 ns  mutex_release_time:4296 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:17
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:19
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:19
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4587678835  lock_exit:4606690149  unlock_entry:4629683380  unlock_exit:4629688367
+lock_acquire_time:19011314 ns  critical_section_time:22993231 ns  mutex_release_time:4987 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:18
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:32
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:32
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:4540559733  lock_exit:4540560605  unlock_entry:4640699162  unlock_exit:4640701916
+lock_acquire_time:872 ns  critical_section_time:100138557 ns  mutex_release_time:2754 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:20
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:20
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4610679527  lock_exit:4629689950  unlock_entry:4652687277  unlock_exit:4652692495
+lock_acquire_time:19010423 ns  critical_section_time:22997327 ns  mutex_release_time:5218 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:19
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:21
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:21
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4633678427  lock_exit:4652693646  unlock_entry:4675684114  unlock_exit:4675688430
+lock_acquire_time:19015219 ns  critical_section_time:22990468 ns  mutex_release_time:4316 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:20
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:22
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:22
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4656678127  lock_exit:4675690023  unlock_entry:4698682583  unlock_exit:4698686389
+lock_acquire_time:19011896 ns  critical_section_time:22992560 ns  mutex_release_time:3806 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:21
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:23
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:23
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4679679321  lock_exit:4698687931  unlock_entry:4721683645  unlock_exit:4721687341
+lock_acquire_time:19008610 ns  critical_section_time:22995714 ns  mutex_release_time:3696 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:22
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:33
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:33
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:4640711691  lock_exit:4640712562  unlock_entry:4740734100  unlock_exit:4740737074
+lock_acquire_time:871 ns  critical_section_time:100021538 ns  mutex_release_time:2974 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:24
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:24
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4702677640  lock_exit:4721688543  unlock_entry:4744682726  unlock_exit:4744687192
+lock_acquire_time:19010903 ns  critical_section_time:22994183 ns  mutex_release_time:4466 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:23
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:25
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:25
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4725678802  lock_exit:4744688574  unlock_entry:4767683147  unlock_exit:4767686692
+lock_acquire_time:19009772 ns  critical_section_time:22994573 ns  mutex_release_time:3545 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:24
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:26
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:26
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4748677652  lock_exit:4767688586  unlock_entry:4790682097  unlock_exit:4790687265
+lock_acquire_time:19010934 ns  critical_section_time:22993511 ns  mutex_release_time:5168 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:25
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:27
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:27
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4771679636  lock_exit:4790688617  unlock_entry:4813683711  unlock_exit:4813687937
+lock_acquire_time:19008981 ns  critical_section_time:22995094 ns  mutex_release_time:4226 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:26
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:28
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:28
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4794678005  lock_exit:4813689259  unlock_entry:4836683021  unlock_exit:4836687678
+lock_acquire_time:19011254 ns  critical_section_time:22993762 ns  mutex_release_time:4657 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:27
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:34
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:34
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:4740746809  lock_exit:4740747661  unlock_entry:4840781087  unlock_exit:4840783490
+lock_acquire_time:852 ns  critical_section_time:100033426 ns  mutex_release_time:2403 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:29
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:29
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4817677856  lock_exit:4836688840  unlock_entry:4859683573  unlock_exit:4859687599
+lock_acquire_time:19010984 ns  critical_section_time:22994733 ns  mutex_release_time:4026 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:28
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:30
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:30
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4840679390  lock_exit:4859688831  unlock_entry:4882682282  unlock_exit:4882686268
+lock_acquire_time:19009441 ns  critical_section_time:22993451 ns  mutex_release_time:3986 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:29
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:31
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:31
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4863678249  lock_exit:4882687621  unlock_entry:4905683756  unlock_exit:4905687723
+lock_acquire_time:19009372 ns  critical_section_time:22996135 ns  mutex_release_time:3967 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:30
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:32
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:32
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4886677760  lock_exit:4905689115  unlock_entry:4928683237  unlock_exit:4928686932
+lock_acquire_time:19011355 ns  critical_section_time:22994122 ns  mutex_release_time:3695 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:31
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:35
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:35
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:4840792433  lock_exit:4840793326  unlock_entry:4940740909  unlock_exit:4940742932
+lock_acquire_time:893 ns  critical_section_time:99947583 ns  mutex_release_time:2023 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:33
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:33
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4909678482  lock_exit:4928688404  unlock_entry:4951683538  unlock_exit:4951687335
+lock_acquire_time:19009922 ns  critical_section_time:22995134 ns  mutex_release_time:3797 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:32
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:34
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:34
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4932677602  lock_exit:4951688757  unlock_entry:4974682438  unlock_exit:4974686194
+lock_acquire_time:19011155 ns  critical_section_time:22993681 ns  mutex_release_time:3756 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:33
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:35
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:35
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:4955678345  lock_exit:4974687747  unlock_entry:4997683741  unlock_exit:4997687548
+lock_acquire_time:19009402 ns  critical_section_time:22995994 ns  mutex_release_time:3807 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:34
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:36
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:36
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:4978677596  lock_exit:4997688829  unlock_entry:5020682430  unlock_exit:5020686568
+lock_acquire_time:19011233 ns  critical_section_time:22993601 ns  mutex_release_time:4138 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:35
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:36
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:36
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:4940750054  lock_exit:4940750815  unlock_entry:5040605475  unlock_exit:5040607438
+lock_acquire_time:761 ns  critical_section_time:99854660 ns  mutex_release_time:1963 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:37
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:37
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:5001678699  lock_exit:5020687669  unlock_entry:5043682752  unlock_exit:5043686539
+lock_acquire_time:19008970 ns  critical_section_time:22995083 ns  mutex_release_time:3787 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:36
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:38
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:38
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:5024678269  lock_exit:5043687851  unlock_entry:5066682623  unlock_exit:5066687041
+lock_acquire_time:19009582 ns  critical_section_time:22994772 ns  mutex_release_time:4418 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:37
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:39
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:39
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:5047678551  lock_exit:5066688303  unlock_entry:5089687633  unlock_exit:5089692691
+lock_acquire_time:19009752 ns  critical_section_time:22999330 ns  mutex_release_time:5058 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:38
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:40
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:40
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:5070678603  lock_exit:5089694433  unlock_entry:5112683689  unlock_exit:5112687824
+lock_acquire_time:19015830 ns  critical_section_time:22989256 ns  mutex_release_time:4135 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:39
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:41
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:41
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t0  pid:51167  mutex:ffffffffc10ed0a0
+lock_entry:5093678483  lock_exit:5112689226  unlock_entry:5135683669  unlock_exit:5135687736
+lock_acquire_time:19010743 ns  critical_section_time:22994443 ns  mutex_release_time:4067 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+wait_time:19 ms, waiter_count:40
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea2b7
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:37
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:37
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:5040613828  lock_exit:5040614550  unlock_entry:5140733436  unlock_exit:5140735690
+lock_acquire_time:722 ns  critical_section_time:100118886 ns  mutex_release_time:2254 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:40
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+hold_time:22 ms, waiter_count:40
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s5_t1  pid:51168  mutex:ffffffffc10ed0a0
+lock_entry:5116678655  lock_exit:5135689258  unlock_entry:5158683080  unlock_exit:5158685664
+lock_acquire_time:19010603 ns  critical_section_time:22993822 ns  mutex_release_time:2584 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea2e0
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:38
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:38
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:5140742671  lock_exit:5140743462  unlock_entry:5241129259  unlock_exit:5241131311
+lock_acquire_time:791 ns  critical_section_time:100385797 ns  mutex_release_time:2052 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:41
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:41
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+lock_entry:5448517407  lock_exit:5448518699  unlock_entry:5549699588  unlock_exit:5549702833
+lock_acquire_time:1292 ns  critical_section_time:101180889 ns  mutex_release_time:3245 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s6_hold  pid:51220  mutex:ffffffffc10ed080
+hold_time:31 ms, waiter_count:3
+execname:mt_s6_hold  pid:51220  mutex:ffffffffc10ed080
+hold_time:31 ms, waiter_count:3
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s6_hold  pid:51220  mutex:ffffffffc10ed080
+lock_entry:5656801632  lock_exit:5656802983  unlock_entry:5687901325  unlock_exit:5687904189
+lock_acquire_time:1351 ns  critical_section_time:31098342 ns  mutex_release_time:2864 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea44f
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s6_wait  pid:51221  mutex:ffffffffc10ed080
+wait_time:22 ms, waiter_count:2
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea337
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s6_wait  pid:51221  mutex:ffffffffc10ed080
+lock_entry:5665393880  lock_exit:5687904319  unlock_entry:5688939379  unlock_exit:5688940081
+lock_acquire_time:22510439 ns  critical_section_time:1035060 ns  mutex_release_time:702 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea34f
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:43
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:43
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+lock_entry:5656752035  lock_exit:5656753057  unlock_entry:5757918552  unlock_exit:5757921727
+lock_acquire_time:1022 ns  critical_section_time:101165495 ns  mutex_release_time:3175 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:44
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+hold_time:101 ms, waiter_count:44
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/0:1  pid:51112  mutex:ff1b1712471f3950
+lock_entry:5757933985  lock_exit:5757934867  unlock_entry:5858946715  unlock_exit:5858949299
+lock_acquire_time:882 ns  critical_section_time:101011848 ns  mutex_release_time:2584 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:46
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:46
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:5864302172  lock_exit:5864303113  unlock_entry:5964615928  unlock_exit:5964618723
+lock_acquire_time:941 ns  critical_section_time:100312815 ns  mutex_release_time:2795 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s7_hA  pid:51225  mutex:ffffffffc10ed060
+hold_time:42 ms, waiter_count:3
+execname:mt_s7_hA  pid:51225  mutex:ffffffffc10ed060
+hold_time:42 ms, waiter_count:3
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s7_hA  pid:51225  mutex:ffffffffc10ed060
+lock_entry:6072587068  lock_exit:6072587709  unlock_entry:6114689193  unlock_exit:6114695993
+lock_acquire_time:641 ns  critical_section_time:42101484 ns  mutex_release_time:6800 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea3e4
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s7_wA  pid:51226  mutex:ffffffffc10ed060
+wait_time:35 ms, waiter_count:2
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea38b
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s7_wA  pid:51226  mutex:ffffffffc10ed060
+lock_entry:6079175208  lock_exit:6114700219  unlock_entry:6115740597  unlock_exit:6115741478
+lock_acquire_time:35525011 ns  critical_section_time:1040378 ns  mutex_release_time:881 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea3a3
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s7_hB  pid:51227  mutex:ffffffffc10ed040
+hold_time:64 ms, waiter_count:3
+execname:mt_s7_hB  pid:51227  mutex:ffffffffc10ed040
+hold_time:64 ms, waiter_count:3
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s7_hB  pid:51227  mutex:ffffffffc10ed040
+lock_entry:6072652540  lock_exit:6072655694  unlock_entry:6136682166  unlock_exit:6136684991
+lock_acquire_time:3154 ns  critical_section_time:64026472 ns  mutex_release_time:2825 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea3e4
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:mt_s7_wB  pid:51228  mutex:ffffffffc10ed040
+wait_time:56 ms, waiter_count:2
+
+--- stack() ---
+
+              vmlinux`mutex_lock+0x5
+              0xffffffffc10ea38b
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:mt_s7_wB  pid:51228  mutex:ffffffffc10ed040
+lock_entry:6079778615  lock_exit:6136686514  unlock_entry:6137712459  unlock_exit:6137713030
+lock_acquire_time:56907899 ns  critical_section_time:1025945 ns  mutex_release_time:571 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              0xffffffffc10ea3a3
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:48
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:48
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:6072541719  lock_exit:6072542531  unlock_entry:6172612080  unlock_exit:6172614464
+lock_acquire_time:812 ns  critical_section_time:100069549 ns  mutex_release_time:2384 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:49
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:100 ms, waiter_count:49
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:6172624269  lock_exit:6172624930  unlock_entry:6272639787  unlock_exit:6272642452
+lock_acquire_time:661 ns  critical_section_time:100014857 ns  mutex_release_time:2665 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:50
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:50
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/7:0  pid:47833  mutex:ff1b1712471f3950
+lock_entry:6272653108  lock_exit:6272653839  unlock_entry:6372426755  unlock_exit:6372429139
+lock_acquire_time:731 ns  critical_section_time:99772916 ns  mutex_release_time:2384 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+execname:kworker/5:0  pid:50941  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:96
+execname:kworker/5:0  pid:50941  mutex:ff1b1712471f3950
+hold_time:99 ms, waiter_count:96
+
+--- Mutex >10ms [acquire/hold] event ---
+execname:kworker/5:0  pid:50941  mutex:ff1b1712471f3950
+lock_entry:15596279999  lock_exit:15596281021  unlock_entry:15696123433  unlock_exit:15696126978
+lock_acquire_time:1022 ns  critical_section_time:99842412 ns  mutex_release_time:3545 ns
+
+--- stack() ---
+
+              vmlinux`mutex_unlock+0x5
+              drm_kms_helper`drm_fb_helper_damage_work+0x1d3
+              vmlinux`process_one_work+0x1ee
+              vmlinux`worker_thread+0x53
+              vmlinux`kthread+0x124
+              vmlinux`ret_from_fork+0x1f
+
+--- ustack() ---
+
+     --------------------------------------------    
+
+Mutex contention tracking ran for 91 secs, start_time=2198583326334ns end_time=2290572959131ns run_time_given=90 secs
+
+  Mutex lock stall (us)                             
+           value  ------------- Distribution ------------- count    
+              -1 |                                         0        
+               0 |@@@@@@@@@@@@@@                           31       
+               1 |@@@                                      7        
+               2 |                                         1        
+               4 |                                         0        
+               8 |                                         0        
+              16 |                                         0        
+              32 |                                         0        
+              64 |                                         0        
+             128 |                                         0        
+             256 |                                         0        
+             512 |                                         0        
+            1024 |                                         0        
+            2048 |                                         0        
+            4096 |                                         0        
+            8192 |                                         0        
+           16384 |@@@@@@@@@@@@@@@@@@                       40       
+           32768 |@                                        3        
+           65536 |@@                                       5        
+          131072 |                                         0        
+
+
+  Critical section (us)                             
+           value  ------------- Distribution ------------- count    
+             256 |                                         0        
+             512 |                                         1        
+            1024 |@@                                       4        
+            2048 |                                         0        
+            4096 |@@                                       4        
+            8192 |                                         0        
+           16384 |@@@@@@@@@@@@@@@@@@@                      41       
+           32768 |@                                        3        
+           65536 |@@@@@@@@@@@@@@@@                         34       
+          131072 |                                         0        
+
+
+  Mutex unlock stall (us)                           
+           value  ------------- Distribution ------------- count    
+              -1 |                                         0        
+               0 |@@@                                      6        
+               1 |@@                                       5        
+               2 |@@@@@@@@@@@@@@@@@@@@@@@                  50       
+               4 |@@@@@@@@@@@                              25       
+               8 |                                         1        
+              16 |                                         0        
+
+

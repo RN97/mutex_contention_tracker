@@ -1,0 +1,222 @@
+Mutex Contention Test Module - Instructions
+============================================
+
+Prerequisites
+-------------
+- Linux system with kernel headers installed
+- DTrace support enabled (or dtrace4linux / Oracle Linux with DTrace)
+- Root/sudo access
+
+Build
+-----
+    cd mutex_track/test
+    make
+
+  On OL8, use gcc-toolset-11 to match the kernel's compiler version:
+
+    scl enable gcc-toolset-11 'make'
+
+  If kernel headers are in a non-standard location:
+
+    make KDIR=/path/to/kernel/build
+
+  Clean build artifacts:
+
+    make clean
+
+Running Tests
+-------------
+
+1. Start the DTrace monitor from the mutex_track root directory:
+
+    cd mutex_track
+    ./mutex_contention.sh 120 10
+
+   This monitors for 120 seconds with a 10ms threshold. Adjust the
+   runtime to be long enough for all scenarios to complete. With default
+   hold_ms=50, all 13 scenarios finish in ~13 seconds total (scenario 12
+   is the longest at ~7 seconds).
+
+2. In a second terminal, load the test module from the test directory:
+
+    cd mutex_track/test
+    sudo insmod mutex_test_kmod.ko
+
+   This runs all 13 scenarios sequentially with default timings.
+
+3. Watch kernel log output:
+
+    dmesg -w | grep mutex_test
+
+4. After "All requested scenarios launched" appears in dmesg, unload:
+
+    sudo rmmod mutex_test_kmod
+
+5. Check DTrace results:
+
+    less /tmp/mutex_contention/mutex_scanner_all.log
+
+6. Validate DTrace output automatically:
+
+    cd mutex_track/test
+    ./validate_dtrace_output.sh
+
+   This parses the DTrace log and checks each scenario's expected
+   output, reporting PASS/FAIL per scenario. Exit code: 0 = all pass,
+   1 = any fail, 2 = log file missing/invalid.
+
+   Options:
+
+    ./validate_dtrace_output.sh [LOG_FILE] [THRESHOLD_MS]
+
+   Defaults: /tmp/mutex_contention/mutex_scanner_all.log, 10
+
+   To test against the included sample outputs:
+
+    ./validate_dtrace_output.sh sample_output.log 10    # S1-S7 only
+    ./validate_dtrace_output.sh sample_output_2.log 10  # all 13 scenarios
+
+Module Parameters
+-----------------
+  run_scenario (int, default 0)
+    Which scenario to run. 0 = all, 1-13 = specific scenario.
+
+  hold_ms (int, default 50)
+    Base mutex hold time in milliseconds. Scenarios derive their
+    specific timings from this value.
+
+  Examples:
+
+    # Run only scenario 3 (thundering herd) with 100ms hold
+    sudo insmod mutex_test_kmod.ko run_scenario=3 hold_ms=100
+
+    # Run all scenarios with shorter hold times
+    sudo insmod mutex_test_kmod.ko hold_ms=20
+
+Test Scenarios
+--------------
+
+Scenario 1: Long acquisition stall
+  Thread A holds mutex and sleeps for hold_ms. Thread B blocks on
+  mutex_lock for ~hold_ms, triggering a long lock-acquire event.
+  DTrace should report: lock_acquire_time > threshold.
+
+Scenario 2: Long critical section
+  Thread acquires mutex and sleeps for hold_ms*2 before releasing.
+  A waiter thread blocks, causing both long acquire and long hold
+  events.
+  DTrace should report: critical_section_time > threshold.
+
+Scenario 3: Multiple waiters (thundering herd)
+  One holder sleeps hold_ms+30ms. Four waiter threads all block on
+  the same mutex simultaneously.
+  DTrace should report: waiter_count > 1 for the contended mutex.
+
+Scenario 4: Short contention (below threshold)
+  Holder holds for only 1ms. Contention is brief.
+  DTrace should NOT report this event (below 10ms default threshold).
+  Use this to verify filtering works correctly.
+
+Scenario 5: Repeated lock/unlock cycles
+  Two threads alternate acquiring the same mutex for 20 iterations
+  each, holding 20ms per iteration.
+  DTrace should report: multiple events in the histograms, showing
+  distribution across repeated acquisitions.
+
+Scenario 6: CPU-bound critical section (busy-wait)
+  Holder acquires mutex and busy-loops (udelay) for ~30ms instead
+  of sleeping. A waiter contends.
+  DTrace should report: contention from CPU-bound work, not sleeps.
+  Verifies the probes fire regardless of how time is spent in the
+  critical section.
+
+Scenario 7: Staggered multi-mutex contention
+  Two independent mutexes (A and B) with a holder+waiter pair each.
+  Mutex A held for 40ms, Mutex B for 60ms, running concurrently.
+  DTrace should report: two distinct mutex addresses with different
+  timing profiles. Verifies per-mutex tracking is independent.
+
+Scenario 8: Nested mutex acquisition (outer long wait)
+  Thread acquires mutex A (long wait), then acquires mutex B
+  (uncontended) inside A's critical section.
+  DTrace should report: mutex A (long acquire). mutex B should NOT
+  appear (short wait, short hold). Verifies long_wait[A] does not
+  leak to mutex B (tests the per-mutex long_wait fix).
+
+Scenario 9: Reverse nested mutex (inner long wait)
+  Thread acquires mutex A (uncontended), then contends on mutex B
+  inside A's critical section. Separate holder holds B for hold_ms.
+  DTrace should report: mutex B (long acquire). mutex A may also
+  appear (long critical_section_time since A is held while waiting
+  for B), but must NOT show a long lock_acquire_time (which would
+  indicate long_wait leak). Verifies long_wait[B] is independent of A.
+
+Scenario 10: High thread count contention
+  16 threads all contend on a single mutex. Holder holds for hold_ms,
+  each waiter holds 15ms after acquiring.
+  DTrace should report: waiter_count values up to 15. Tests dynvar
+  space pressure with many concurrent per-thread timestamp entries.
+
+Scenario 11: Many unique mutexes
+  50 dynamically allocated mutexes, each with a holder+waiter pair
+  contending for hold_ms/2. All pairs run concurrently.
+  DTrace should report: up to 50 distinct mutex addresses. Tests
+  dynvar space with many unique mutex address keys.
+
+Scenario 12: Rapid lock/unlock burst
+  4 threads x 100 rapid lock/unlock cycles on the same mutex, holding
+  15ms per cycle. Generates ~400 contention events.
+  DTrace should report: large histogram distributions. Tests DTrace
+  buffer pressure and dynvar turnover under sustained load.
+  Note: this scenario takes ~7 seconds with default timings.
+
+Scenario 13: Long wait with short hold
+  Thread A holds mutex for hold_ms. Thread B blocks for ~hold_ms,
+  then releases immediately (hold time ~0).
+  DTrace should report: long acquisition time + near-zero hold time
+  in the lifecycle report. Tests the code path where long_wait[addr]
+  is set but the critical section is below threshold.
+
+Kernel Module PASS/FAIL Reporting
+---------------------------------
+The kernel module reports per-scenario thread completion counts in
+dmesg. After each scenario completes, it prints:
+
+    mutex_test: [S1] PASS: 2/2 threads completed
+    mutex_test: [S3] FAIL: 3/5 threads completed
+
+At the end, a global summary:
+
+    mutex_test: Results: 12 of 13 PASSED, 1 FAILED
+
+This is the kernel-side health check — it validates the test
+infrastructure itself ran correctly (thread creation, thread
+completion), not the DTrace output. Use validate_dtrace_output.sh
+to validate the DTrace output.
+
+Expected DTrace Output
+----------------------
+For each contention event above threshold, the DTrace script reports:
+
+  - execname, pid, mutex address
+  - lock_acquire_time (ns) - time blocked waiting to acquire
+  - critical_section_time (ns) - time lock was held
+  - mutex_release_time (ns) - time to release
+  - Kernel stack trace (stack())
+  - User-space stack trace (ustack())
+  - waiter_count for the mutex
+
+At the end of the run, three histograms summarize:
+  - Mutex lock stall distribution (us)
+  - Critical section distribution (us)
+  - Mutex unlock stall distribution (us)
+
+Troubleshooting
+---------------
+- "module not found": Run `make` first to build mutex_test_kmod.ko
+- "insmod: ERROR: could not insert module": Check dmesg for details.
+  Common cause: module built against wrong kernel version.
+- No DTrace output: Ensure threshold is lower than hold_ms. With
+  default hold_ms=50, use threshold <= 40 to see scenario 1 events.
+- Module won't unload: Wait for all scenarios to finish (check dmesg),
+  then retry rmmod.

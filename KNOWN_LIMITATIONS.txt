@@ -1,0 +1,120 @@
+Mutex Scanner — Known Limitations and Edge Cases
+=================================================
+
+This document describes inherent DTrace limitations and edge cases that
+cannot be fully resolved within the mutex_scanner.d script. These do not
+affect correctness under normal operation but may cause minor anomalies
+under extreme conditions.
+
+
+1. Waiter Count Inaccuracy on Dynvar Drops
+------------------------------------------
+
+Context:
+  In mutex_lock:entry, three dynvar operations occur:
+
+    self->mutex = arg0;                    /* scalar — always succeeds */
+    self->lock_entry_ts[arg0] = timestamp; /* dynvar — can be dropped  */
+    lock_wait_cnt[arg0] += 1;             /* dynvar — can be dropped  */
+
+  If dynvar space is exhausted, lock_entry_ts and lock_wait_cnt may both
+  be silently dropped.
+
+What happens:
+  The dynvar drop cleanup clause in mutex_lock:return detects the missing
+  lock_entry_ts and decrements lock_wait_cnt to compensate. However, if
+  the original increment was also dropped, the decrement drives the count
+  to -1 for that mutex address.
+
+Impact:
+  The waiter_count value displayed in contention reports may be off by 1
+  (typically showing -1 or one less than the actual count). This is purely
+  cosmetic — it does not affect predicate evaluation, state tracking, or
+  event reporting logic.
+
+Self-correction:
+  The count self-corrects when the next thread successfully increments
+  lock_wait_cnt for the same mutex address. The inaccuracy is transient
+  and only persists while dynvar space remains exhausted.
+
+Mitigation:
+  Increase dynvarsize if waiter count anomalies are observed. The current
+  setting (32m) supports approximately 500,000 concurrent dynvar entries.
+
+
+2. Thread Exit with In-Flight Mutex State
+-----------------------------------------
+
+Context:
+  Between mutex_lock:return and mutex_unlock:entry, the following
+  per-thread dynvar entries are active for the held mutex:
+
+    self->lock_entry_ts[addr]
+    self->lock_exit_ts[addr]
+    self->long_wait[addr]
+
+  These are cleaned up by the mutex_unlock:entry or mutex_unlock:return
+  probes when the thread releases the mutex.
+
+What happens:
+  If a thread is killed (e.g., SIGKILL, OOM kill, or kernel thread
+  termination) while holding a mutex, the unlock probes never fire for
+  that thread. The per-thread dynvar entries for the held mutex are
+  orphaned.
+
+Impact:
+  The orphaned dynvar entries consume dynvar space until DTrace reclaims
+  the thread-local storage for the terminated thread. The DTrace runtime
+  typically frees thread-local variables when the thread's LWP is
+  destroyed, but this is implementation-dependent.
+
+  Additionally, lock_wait_cnt for the mutex may remain permanently
+  elevated by 1 (the entry probe incremented it, but the return probe
+  of the *next* lock acquisition — by another thread — would not
+  compensate for the dead thread's count).
+
+Mitigation:
+  This is an inherent limitation of DTrace's per-thread tracing model.
+  There is no mechanism within a D script to detect thread termination
+  and trigger cleanup. On long-running traces where threads are
+  frequently killed, increase dynvarsize to absorb the leaked entries.
+
+
+3. Dynvar Drops Are Silent
+--------------------------
+
+Context:
+  When DTrace exhausts the dynvar space (controlled by the dynvarsize
+  pragma), new dynvar allocations are silently dropped — the assignment
+  appears to execute but the value is not stored. DTrace increments an
+  internal drop counter but does not notify the script.
+
+What happens:
+  The mutex_scanner.d script includes defensive cleanup clauses for the
+  two most impactful dynvar drops:
+
+    - lock_entry_ts dropped → detected in mutex_lock:return, state
+      cleaned up, event skipped.
+    - lock_exit_ts dropped  → detected in mutex_unlock:entry, orphaned
+      lock_entry_ts and long_wait cleaned up, event skipped.
+
+  However, drops of long_wait[addr] or lock_wait_cnt[addr] cannot be
+  independently detected and may cause:
+
+    - long_wait dropped: A mutex with a long acquisition but short hold
+      will not be tracked through the unlock phase. The lock-acquire
+      event is still reported in mutex_lock:return, but the full
+      lifecycle report (with all three timing phases) is lost.
+
+    - lock_wait_cnt dropped: Waiter counts may be inaccurate (see
+      limitation 1 above).
+
+Impact:
+  Under dynvar exhaustion, some contention events are silently lost.
+  The script prioritizes avoiding bogus data over completeness — it is
+  better to skip an event than to report incorrect timestamps.
+
+Mitigation:
+  The current dynvarsize of 32m is sufficient for most workloads. For
+  systems with very high mutex activity (thousands of threads, tens of
+  thousands of unique mutex addresses), increase to 64m or higher.
