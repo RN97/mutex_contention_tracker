@@ -35,9 +35,15 @@ chmod +x mutex_contention.sh mutex_scanner.d
 
 ## Output
 
-Results are written to `/tmp/mutex_contention/`:
+Results are written to `/tmp/mutex_contention/` by default. Override the location by exporting `OUTPUT_DIR` before invoking the wrapper (useful when `/tmp` is small or you want results on persistent storage):
 
-- **mutex_scanner_<timestamp>.log** — All contention events with timing and stack traces for a single run
+```bash
+OUTPUT_DIR=/var/log/mutex_contention ./mutex_contention.sh 60 5
+```
+
+Each run produces:
+
+- **mutex_scanner_<timestamp>.log** — All contention events with timing and stack traces for a single run; DTrace stdout and stderr are both captured here so warnings and drop counts are archived alongside the events
 - **mutex_scanner_all.log** — Symlink to the most recent run's log
 - **shell_script.log** — Execution timestamps and status (appended across runs)
 

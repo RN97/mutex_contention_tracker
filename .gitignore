@@ -1,0 +1,19 @@
+# Local-only project context (not shared via git)
+CLAUDE.md
+
+# Kernel module build artifacts (out-of-tree builds in test/)
+*.ko
+*.o
+*.mod
+*.mod.c
+*.mod.o
+*.cmd
+.*.cmd
+*.symvers
+*.markers
+modules.order
+.tmp_versions/
+
+# OS / editor scratch
+.DS_Store
+*.swp
