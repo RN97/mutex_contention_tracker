@@ -13,7 +13,8 @@
  *                   derive their specific timings from this value.
  *
  * Build:
- *   make              (or: scl enable gcc-toolset-11 'make')
+ *   make              (use a matching compiler if the kernel was built
+ *                      with a newer gcc — see Makefile for CC override)
  *
  * Usage:
  *   sudo insmod mutex_test_kmod.ko [run_scenario=N] [hold_ms=N]

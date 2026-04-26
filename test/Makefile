@@ -3,7 +3,9 @@
 # Usage:
 #   make                                          # Build using default gcc
 #   make CC=/path/to/gcc-11                       # Build with specific compiler
-#   scl enable gcc-toolset-11 'make'              # OL8: use matching gcc version
+#                                                 # (use this if the kernel was
+#                                                 #  built with a newer gcc than
+#                                                 #  the system default)
 #   make KDIR=/path/to/kernel/build               # Custom kernel headers path
 #   make clean                                    # Remove build artifacts
 

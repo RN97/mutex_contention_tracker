@@ -4,7 +4,7 @@ Mutex Contention Test Module - Instructions
 Prerequisites
 -------------
 - Linux system with kernel headers installed
-- DTrace support enabled (or dtrace4linux / Oracle Linux with DTrace)
+- DTrace support enabled (e.g., dtrace4linux on Linux distributions)
 - Root/sudo access
 
 Build
@@ -12,9 +12,10 @@ Build
     cd mutex_track/test
     make
 
-  On OL8, use gcc-toolset-11 to match the kernel's compiler version:
+  If your kernel was built with a newer gcc than the system default,
+  build with a matching compiler:
 
-    scl enable gcc-toolset-11 'make'
+    make CC=/path/to/matching-gcc
 
   If kernel headers are in a non-standard location:
 

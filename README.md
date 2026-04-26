@@ -4,7 +4,7 @@ DTrace-based tool for tracking kernel mutex contention across lock acquisition, 
 
 ## Requirements
 
-- Linux or Unix-like system with DTrace support (Oracle Linux, Solaris, macOS)
+- Linux or Unix-like system with DTrace support (Solaris, macOS, or a Linux distribution with `dtrace4linux`)
 - Root/sudo privileges (required for kernel tracing)
 
 ## Setup
@@ -64,7 +64,7 @@ The `test/` directory ships a kernel module that exercises all DTrace probe path
 
 # 2. Build and load the test module (in another terminal)
 cd test/
-make                                     # or: scl enable gcc-toolset-11 'make' on OL8
+make                                     # if your kernel needs a newer gcc, see test/Makefile
 sudo insmod mutex_test_kmod.ko           # runs all 13 scenarios sequentially
 sudo rmmod mutex_test_kmod               # unload after dmesg shows completion
 
