@@ -37,8 +37,9 @@ chmod +x mutex_contention.sh mutex_scanner.d
 
 Results are written to `/tmp/mutex_contention/`:
 
-- **mutex_scanner_all.log** — All contention events with timing and stack traces
-- **shell_script.log** — Execution timestamps and status
+- **mutex_scanner_<timestamp>.log** — All contention events with timing and stack traces for a single run
+- **mutex_scanner_all.log** — Symlink to the most recent run's log
+- **shell_script.log** — Execution timestamps and status (appended across runs)
 
 ### What gets reported
 
@@ -51,7 +52,34 @@ For each mutex event exceeding the threshold:
 - Kernel stack trace (`stack()`) and user-space stack trace (`ustack()`)
 - Number of concurrent waiters on the mutex
 
-At the end of the run, quantized histograms (in microseconds) summarize the distribution of lock stall, critical section, and unlock stall times.
+At the end of the run, quantized histograms (in microseconds) summarize the distribution of lock stall, critical section, and unlock stall times. A diagnostic line also reports any DTrace errors and detected dynvar drops for the run (see `KNOWN_LIMITATIONS.txt` for context).
+
+## Testing
+
+The `test/` directory ships a kernel module that exercises all DTrace probe paths via 13 scenarios (basic contention, thundering herd, nested mutexes, high-thread-count, rapid burst, etc.) and an automated validator.
+
+```bash
+# 1. Start the monitor (in one terminal, from the project root)
+./mutex_contention.sh 120 10
+
+# 2. Build and load the test module (in another terminal)
+cd test/
+make                                     # or: scl enable gcc-toolset-11 'make' on OL8
+sudo insmod mutex_test_kmod.ko           # runs all 13 scenarios sequentially
+sudo rmmod mutex_test_kmod               # unload after dmesg shows completion
+
+# 3. Validate the DTrace output
+./validate_dtrace_output.sh              # PASS/FAIL per scenario, exit 0 = all pass
+```
+
+Sample logs are checked in for offline validation:
+
+```bash
+./validate_dtrace_output.sh sample_output.log    10    # S1-S7
+./validate_dtrace_output.sh sample_output_2.log  10    # all 13 scenarios
+```
+
+See `test/TEST_INSTRUCTIONS.txt` for the full scenario catalog and module parameters.
 
 ## Files
 
@@ -59,7 +87,10 @@ At the end of the run, quantized histograms (in microseconds) summarize the dist
 |------|-------------|
 | `mutex_contention.sh` | Shell wrapper — argument validation, output directory setup, DTrace invocation |
 | `mutex_scanner.d` | DTrace script — instruments `mutex_lock` and `mutex_unlock` kernel probes |
-| `test/mutex_test_kmod.c` | Linux kernel module — 7 mutex contention test scenarios |
+| `KNOWN_LIMITATIONS.txt` | DTrace edge cases (dynvar drops, thread-exit leaks) and mitigations |
+| `test/mutex_test_kmod.c` | Linux kernel module — 13 mutex contention test scenarios |
 | `test/Makefile` | Out-of-tree kernel module build |
-| `test/TEST_INSTRUCTIONS.txt` | Instructions for building and running the test module |
-| `test/sample_output.log` | Sample DTrace output from a test run |
+| `test/validate_dtrace_output.sh` | Parses DTrace log and asserts expected per-scenario behavior |
+| `test/TEST_INSTRUCTIONS.txt` | Full instructions for building and running the test module |
+| `test/sample_output.log` | Sample DTrace output covering scenarios S1–S7 |
+| `test/sample_output_2.log` | Sample DTrace output covering all 13 scenarios |

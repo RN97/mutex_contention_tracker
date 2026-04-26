@@ -49,6 +49,16 @@ long threshold_ns;      /* Threshold converted to nanoseconds */
  */
 int lock_wait_cnt[long];
 
+/*
+ * Diagnostic counters surfaced at END so silent DTrace pathologies
+ * (errors and dynvar drops) become visible to the operator instead
+ * of disappearing into KNOWN_LIMITATIONS.txt. See that file for the
+ * full discussion of when these can fire under normal load.
+ */
+int dtrace_err_cnt;             /* DTrace ERROR probe firings */
+int drop_lock_entry_ts;         /* lock_entry_ts dynvar lost between entry and return */
+int drop_lock_exit_ts;          /* lock_exit_ts dynvar lost between return and unlock */
+
 BEGIN
 {
 	run_time = $1;
@@ -138,6 +148,7 @@ BEGIN
 /
 {
 	lock_wait_cnt[self->mutex] -= 1;
+	drop_lock_entry_ts += 1;
 	self->mutex = 0;
 }
 
@@ -217,6 +228,7 @@ BEGIN
 {
 	self->lock_entry_ts[arg0] = 0;
 	self->long_wait[arg0] = 0;
+	drop_lock_exit_ts += 1;
 }
 
 /*
@@ -282,6 +294,18 @@ tick-1sec
 	exit(0);
 }
 
+/*
+ * PROBE: dtrace ERROR
+ *
+ * Counts every D-script runtime error (e.g. invalid load, divide-by-zero,
+ * predicate exception) so the operator sees a non-zero number at END
+ * rather than silently malformed output.
+ */
+dtrace:::ERROR
+{
+	dtrace_err_cnt += 1;
+}
+
 /* Print summary and histograms on exit */
 END
 {
@@ -289,6 +313,9 @@ END
 	prog_run_time = (end_timestamp - start_timestamp) / 1000000000;
 	printf("Mutex contention tracking ran for %ld secs, start_time=%ldns end_time=%ldns run_time_given=%ld secs\n",
 	       prog_run_time, start_timestamp, end_timestamp, run_time);
+	printf("Diagnostics: dtrace_errors=%d  dynvar_drops_lock_entry_ts=%d  dynvar_drops_lock_exit_ts=%d\n",
+	       dtrace_err_cnt, drop_lock_entry_ts, drop_lock_exit_ts);
+	printf("(Non-zero drops indicate dynvar pressure — see KNOWN_LIMITATIONS.txt; raise dynvarsize if persistent.)\n");
 	printa(@time1);
 	printa(@time2);
 	printa(@time3);
