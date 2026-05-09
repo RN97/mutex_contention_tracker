@@ -1,10 +1,10 @@
 # Mutex Contention Tracker
 
-DTrace-based tool for tracking kernel mutex contention across lock acquisition, hold, and release phases. Identifies mutexes with wait times exceeding a configurable threshold and provides detailed timing breakdowns with kernel and user-space stack traces.
+DTrace-based tool for tracking Linux kernel mutex contention across lock acquisition, hold, and release phases. Identifies mutexes with wait times exceeding a configurable threshold and provides detailed timing breakdowns with optional kernel and user-space stack traces.
 
 ## Requirements
 
-- Linux or Unix-like system with DTrace support (Solaris, macOS, or a Linux distribution with `dtrace4linux`)
+- Linux system with DTrace support for kernel `mutex_lock` / `mutex_unlock` probes, such as a distribution using `dtrace4linux`
 - Root/sudo privileges (required for kernel tracing)
 
 ## Setup
@@ -26,11 +26,31 @@ chmod +x mutex_contention.sh mutex_scanner.d
 | `RUN_TIME_SECONDS` | Yes | — | Duration to monitor in seconds |
 | `THRESHOLD_MS` | No | 10 | Lock acquire/hold time threshold in milliseconds |
 
+### Runtime controls
+
+The wrapper keeps the positional CLI stable and uses environment variables for production controls:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DTRACE_BIN` | `dtrace` on `PATH`, then `/usr/sbin/dtrace` | DTrace executable to invoke explicitly |
+| `OUTPUT_DIR` | `/tmp/mutex_contention` | Directory for run logs |
+| `FILTER_EXECNAME` | unset | Only report events from this exact `execname` |
+| `FILTER_PID` | `0` | Only report events from this PID; `0` reports all |
+| `FILTER_MUTEX` | `0` | Only report this mutex address; accepts decimal or `0x` hex |
+| `CAPTURE_STACKS` | `1` | Set to `0` to suppress `stack()` / `ustack()` in text output |
+| `OUTPUT_FORMAT` | `text` | Lifecycle event format: `text`, `tsv`, or `json` |
+
 ### Example
 
 ```bash
 # Monitor for 120 seconds, flag any lock acquisition taking longer than 5ms
 ./mutex_contention.sh 120 5
+
+# Reduce log volume on a busy system
+FILTER_EXECNAME=worker CAPTURE_STACKS=0 ./mutex_contention.sh 60 10
+
+# Emit lifecycle events as TSV for post-processing
+OUTPUT_FORMAT=tsv FILTER_PID=1234 ./mutex_contention.sh 60 10
 ```
 
 ## Output
@@ -55,10 +75,10 @@ For each mutex event exceeding the threshold:
 - **lock_acquire_time** — Time spent waiting to acquire the lock
 - **critical_section_time** — Time the lock was held
 - **mutex_release_time** — Time spent releasing the lock
-- Kernel stack trace (`stack()`) and user-space stack trace (`ustack()`)
+- Kernel stack trace (`stack()`) and user-space stack trace (`ustack()`) in text output when `CAPTURE_STACKS=1`
 - Number of concurrent waiters on the mutex
 
-At the end of the run, quantized histograms (in microseconds) summarize the distribution of lock stall, critical section, and unlock stall times. A diagnostic line also reports any DTrace errors and detected dynvar drops for the run (see `KNOWN_LIMITATIONS.txt` for context).
+At the end of the run, quantized histograms (in microseconds) summarize the distribution of reported lock stall, critical section, and unlock stall times. A diagnostic line also reports any DTrace errors and detected dynvar drops for the run (see `KNOWN_LIMITATIONS.txt` for context).
 
 ## Testing
 
@@ -81,8 +101,8 @@ sudo rmmod mutex_test_kmod               # unload after dmesg shows completion
 Sample logs are checked in for offline validation:
 
 ```bash
-./validate_dtrace_output.sh sample_output.log    10    # S1-S7
-./validate_dtrace_output.sh sample_output_2.log  10    # all 13 scenarios
+./validate_dtrace_output.sh sample_output.log    10 1-7    # S1-S7
+./validate_dtrace_output.sh sample_output_2.log  10        # all 13 scenarios
 ```
 
 See `test/TEST_INSTRUCTIONS.txt` for the full scenario catalog and module parameters.

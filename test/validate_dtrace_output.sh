@@ -6,16 +6,18 @@
 # reporting PASS/FAIL per scenario with a final summary.
 #
 # Usage:
-#   ./validate_dtrace_output.sh [LOG_FILE] [THRESHOLD_MS]
+#   ./validate_dtrace_output.sh [LOG_FILE] [THRESHOLD_MS] [SCENARIOS]
 #
 # Defaults:
 #   LOG_FILE     = /tmp/mutex_contention/mutex_scanner_all.log
 #   THRESHOLD_MS = 10
+#   SCENARIOS    = 1-13 (examples: 1-7, 1,3,5, all)
 
 set -u
 
 LOG_FILE="${1:-/tmp/mutex_contention/mutex_scanner_all.log}"
 THRESHOLD_MS="${2:-10}"
+SCENARIOS="${3:-1-13}"
 THRESHOLD_NS=$((THRESHOLD_MS * 1000000))
 
 PASS_COUNT=0
@@ -25,20 +27,82 @@ FAIL_COUNT=0
 
 pass() {
     local tag="$1"; shift
+    scenario_enabled "$tag" || return 0
     printf "[PASS] %-4s %-35s: %s\n" "$tag" "$1" "$2"
     PASS_COUNT=$((PASS_COUNT + 1))
 }
 
 fail() {
     local tag="$1"; shift
+    scenario_enabled "$tag" || return 0
     printf "[FAIL] %-4s %-35s: %s\n" "$tag" "$1" "$2"
     FAIL_COUNT=$((FAIL_COUNT + 1))
+}
+
+scenario_enabled() {
+    local tag="$1"
+    local num="${tag#S}"
+    local part start end
+
+    if [ "$SCENARIOS" = "all" ]; then
+        return 0
+    fi
+
+    local IFS=,
+    for part in $SCENARIOS; do
+        part="${part#S}"
+        if [[ "$part" == *-* ]]; then
+            start="${part%-*}"
+            end="${part#*-}"
+            start="${start#S}"
+            end="${end#S}"
+            if [[ "$start" =~ ^[0-9]+$ && "$end" =~ ^[0-9]+$ ]] &&
+               [ "$num" -ge "$start" ] && [ "$num" -le "$end" ]; then
+                return 0
+            fi
+        elif [[ "$part" =~ ^[0-9]+$ ]] && [ "$num" -eq "$part" ]; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+validate_scenarios() {
+    local part start end
+
+    if [ -z "$SCENARIOS" ]; then
+        return 1
+    fi
+
+    if [ "$SCENARIOS" = "all" ]; then
+        return 0
+    fi
+
+    local IFS=,
+    for part in $SCENARIOS; do
+        part="${part#S}"
+        if [[ "$part" == *-* ]]; then
+            start="${part%-*}"
+            end="${part#*-}"
+            start="${start#S}"
+            end="${end#S}"
+            if ! [[ "$start" =~ ^[0-9]+$ && "$end" =~ ^[0-9]+$ ]] ||
+               [ "$start" -lt 1 ] || [ "$end" -gt 13 ] || [ "$start" -gt "$end" ]; then
+                return 1
+            fi
+        elif ! [[ "$part" =~ ^[0-9]+$ ]] || [ "$part" -lt 1 ] || [ "$part" -gt 13 ]; then
+            return 1
+        fi
+    done
+
+    return 0
 }
 
 # extract_lifecycle_events PATTERN
 #
 # Parse lifecycle blocks from the log. A lifecycle block starts with:
-#   --- Mutex >10ms [acquire/hold] event ---
+#   --- Mutex >Nms [acquire/hold] event ---
 # followed by:
 #   execname:NAME  pid:PID  mutex:ADDR
 #   lock_entry:...  lock_exit:...  unlock_entry:...  unlock_exit:...
@@ -49,7 +113,7 @@ fail() {
 extract_lifecycle_events() {
     local pattern="$1"
     awk -v pat="$pattern" '
-    /^--- Mutex >10ms/ { in_block = 1; next }
+    /^--- Mutex >[0-9]+ms \[acquire\/hold\] event ---/ { in_block = 1; next }
     in_block == 1 && /^execname:/ {
         # execname:NAME  pid:PID  mutex:ADDR
         # Field layout: $1=execname:NAME $2=pid:PID $3=mutex:ADDR
@@ -123,6 +187,12 @@ extract_wait_hold_events() {
 
 # ── Pre-flight checks ───────────────────────────────────────────────────
 
+if ! validate_scenarios; then
+    echo "ERROR: Invalid SCENARIOS selector: $SCENARIOS"
+    echo "       Use all, a range like 1-7, or a list like 1,3,5."
+    exit 2
+fi
+
 if [ ! -f "$LOG_FILE" ]; then
     echo "ERROR: Log file not found: $LOG_FILE"
     exit 2
@@ -140,6 +210,7 @@ fi
 
 echo "Validating DTrace output: $LOG_FILE"
 echo "Threshold: ${THRESHOLD_MS}ms (${THRESHOLD_NS} ns)"
+echo "Scenarios: ${SCENARIOS}"
 echo "================================"
 
 # ── S1: Long acquisition stall ──────────────────────────────────────────

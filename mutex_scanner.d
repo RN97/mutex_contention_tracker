@@ -8,8 +8,10 @@
  *   3. Lock release       (mutex_unlock entry -> return)
  *
  * Only events where the lock acquisition time OR critical section hold
- * time exceeds a configurable threshold (in ms) are reported. For each
- * such event, the script outputs:
+ * time exceeds a configurable threshold (in ms) are reported. Runtime
+ * filters can suppress reported events by execname, pid, or mutex address
+ * while preserving the default full-system behavior. For each text event,
+ * the script outputs:
  *   - Process name, PID, and mutex address
  *   - Nanosecond-precision timestamps for all four phase boundaries
  *   - Kernel stack trace (stack()) and user-space stack trace (ustack())
@@ -20,7 +22,7 @@
  * unlock stalls across all reported events.
  *
  * Usage:
- *   sudo ./mutex_scanner.d <run_time_secs> <threshold_ms>
+ *   sudo dtrace -Cq -s ./mutex_scanner.d <run_time_secs> <threshold_ms>
  *
  * Args:
  *   $1 - Run time in seconds
@@ -31,6 +33,44 @@
 #pragma D option bufsize=32m
 #pragma D option aggsize=32m
 #pragma D option dynvarsize=32m
+
+/* Wrapper-provided controls. Defaults keep direct dtrace execution compatible. */
+#ifndef CAPTURE_STACKS
+#define CAPTURE_STACKS 1
+#endif
+
+#ifndef FILTER_PID
+#define FILTER_PID 0
+#endif
+
+#ifndef FILTER_MUTEX
+#define FILTER_MUTEX 0
+#endif
+
+#ifndef FILTER_EXECNAME_SET
+#define FILTER_EXECNAME_SET 0
+#endif
+
+#ifndef FILTER_EXECNAME
+#define FILTER_EXECNAME ""
+#endif
+
+#ifndef OUTPUT_TEXT
+#define OUTPUT_TEXT 1
+#endif
+
+#ifndef OUTPUT_TSV
+#define OUTPUT_TSV 0
+#endif
+
+#ifndef OUTPUT_JSON
+#define OUTPUT_JSON 0
+#endif
+
+#define MATCH_FILTER(addr) \
+	((FILTER_PID == 0 || pid == FILTER_PID) && \
+	 (FILTER_MUTEX == 0 || (addr) == FILTER_MUTEX) && \
+	 (FILTER_EXECNAME_SET == 0 || execname == FILTER_EXECNAME))
 
 /* Global state */
 long run_time;          /* Requested run duration (seconds) */
@@ -67,6 +107,15 @@ BEGIN
 	start_timestamp = timestamp;
 	printf("start:%ld ns, threshold:%ld ms (%ld ns)\n",
 	       start_timestamp, threshold_ms, threshold_ns);
+#if FILTER_EXECNAME_SET
+	printf("config: output_text=%d output_tsv=%d output_json=%d capture_stacks=%d filter_execname=%s filter_pid=%d filter_mutex=%p\n",
+	       OUTPUT_TEXT, OUTPUT_TSV, OUTPUT_JSON, CAPTURE_STACKS,
+	       FILTER_EXECNAME, FILTER_PID, (void *)FILTER_MUTEX);
+#else
+	printf("config: output_text=%d output_tsv=%d output_json=%d capture_stacks=%d filter_execname=all filter_pid=%d filter_mutex=%p\n",
+	       OUTPUT_TEXT, OUTPUT_TSV, OUTPUT_JSON, CAPTURE_STACKS,
+	       FILTER_PID, (void *)FILTER_MUTEX);
+#endif
 }
 
 /*
@@ -96,21 +145,41 @@ BEGIN
 	(self->mutex != 0) &&
 	(self->lock_entry_ts[self->mutex] != 0) &&
 	(this->wait = timestamp - self->lock_entry_ts[self->mutex]) &&
-	(this->wait > threshold_ns)
+	(this->wait > threshold_ns) &&
+	MATCH_FILTER(self->mutex)
 /
 {
 	self->lock_exit_ts[self->mutex] = timestamp;
 	lock_wait_cnt[self->mutex] -= 1;
 	self->long_wait[self->mutex] = 1;
 
+#if OUTPUT_TEXT
 	printf("execname:%s  pid:%d  mutex:%p\n",
 	       execname, pid, (void *)self->mutex);
 	printf("wait_time:%lu ms, waiter_count:%d\n",
 	       this->wait / 1000000, lock_wait_cnt[self->mutex]);
 
+#if CAPTURE_STACKS
 	printf("\n--- stack() ---\n");
 	stack();
+#endif
+#endif
 
+	self->mutex = 0;
+}
+
+:::mutex_lock:return
+/
+	(self->mutex != 0) &&
+	(self->lock_entry_ts[self->mutex] != 0) &&
+	(this->wait = timestamp - self->lock_entry_ts[self->mutex]) &&
+	(this->wait > threshold_ns) &&
+	!MATCH_FILTER(self->mutex)
+/
+{
+	self->lock_exit_ts[self->mutex] = timestamp;
+	lock_wait_cnt[self->mutex] -= 1;
+	self->long_wait[self->mutex] = 1;
 	self->mutex = 0;
 }
 
@@ -162,16 +231,31 @@ BEGIN
 /
 	(self->lock_exit_ts[arg0] != 0) &&
 	(this->hold = timestamp - self->lock_exit_ts[arg0]) &&
-	(this->hold > threshold_ns)
+	(this->hold > threshold_ns) &&
+	MATCH_FILTER(arg0)
 /
 {
 	self->mutex = arg0;
 	self->unlock_entry_ts = timestamp;
 
+#if OUTPUT_TEXT
 	printf("execname:%s  pid:%d  mutex:%p\n",
 	       execname, pid, (void *)self->mutex);
 	printf("hold_time:%lu ms, waiter_count:%d\n",
 	       this->hold / 1000000, lock_wait_cnt[self->mutex]);
+#endif
+}
+
+:::mutex_unlock:entry
+/
+	(self->lock_exit_ts[arg0] != 0) &&
+	(this->hold = timestamp - self->lock_exit_ts[arg0]) &&
+	(this->hold > threshold_ns) &&
+	!MATCH_FILTER(arg0)
+/
+{
+	self->mutex = arg0;
+	self->unlock_entry_ts = timestamp;
 }
 
 /*
@@ -245,7 +329,7 @@ BEGIN
  *   unlock  = unlock_exit - unlock_entry (time releasing the lock)
  */
 :::mutex_unlock:return
-/ (self->mutex != 0) /
+/ (self->mutex != 0) && MATCH_FILTER(self->mutex) /
 {
 	self->unlock_exit_ts = timestamp;
 
@@ -253,6 +337,7 @@ BEGIN
 	this->cs = self->unlock_entry_ts - self->lock_exit_ts[self->mutex];
 	this->unlock = self->unlock_exit_ts - self->unlock_entry_ts;
 
+#if OUTPUT_TEXT
 	printf("\n--- Mutex >%ldms [acquire/hold] event ---\n", threshold_ms);
 	printf("execname:%s  pid:%d  mutex:%p\n",
 	       execname, pid, (void *)self->mutex);
@@ -267,11 +352,36 @@ BEGIN
 	       this->cs,
 	       this->unlock);
 
+#if CAPTURE_STACKS
 	printf("\n--- stack() ---\n");
 	stack();
 	printf("\n--- ustack() ---\n");
 	ustack();
+#endif
 	printf("     --------------------------------------------    \n\n");
+#endif
+
+#if OUTPUT_TSV
+	printf("mutex_lifecycle\t%s\t%d\t%p\t%lu\t%lu\t%lu\t%lu\t%lu\t%lu\t%lu\t%d\n",
+	       execname, pid, (void *)self->mutex,
+	       self->lock_entry_ts[self->mutex] - start_timestamp,
+	       self->lock_exit_ts[self->mutex] - start_timestamp,
+	       self->unlock_entry_ts - start_timestamp,
+	       self->unlock_exit_ts - start_timestamp,
+	       this->acquire, this->cs, this->unlock,
+	       lock_wait_cnt[self->mutex]);
+#endif
+
+#if OUTPUT_JSON
+	printf("{\"type\":\"mutex_lifecycle\",\"execname\":\"%s\",\"pid\":%d,\"mutex\":\"%p\",\"lock_entry_ns\":%lu,\"lock_exit_ns\":%lu,\"unlock_entry_ns\":%lu,\"unlock_exit_ns\":%lu,\"lock_acquire_time_ns\":%lu,\"critical_section_time_ns\":%lu,\"mutex_release_time_ns\":%lu,\"waiter_count\":%d}\n",
+	       execname, pid, (void *)self->mutex,
+	       self->lock_entry_ts[self->mutex] - start_timestamp,
+	       self->lock_exit_ts[self->mutex] - start_timestamp,
+	       self->unlock_entry_ts - start_timestamp,
+	       self->unlock_exit_ts - start_timestamp,
+	       this->acquire, this->cs, this->unlock,
+	       lock_wait_cnt[self->mutex]);
+#endif
 
 	/* Aggregate histograms in microseconds for readability */
 	@time1["Mutex lock stall (us)"] = quantize(this->acquire / 1000);
@@ -279,6 +389,18 @@ BEGIN
 	@time3["Mutex unlock stall (us)"] = quantize(this->unlock / 1000);
 
 	/* Reset per-thread state for this mutex */
+	self->lock_entry_ts[self->mutex] = 0;
+	self->lock_exit_ts[self->mutex] = 0;
+	self->unlock_entry_ts = 0;
+	self->unlock_exit_ts = 0;
+	self->long_wait[self->mutex] = 0;
+	self->mutex = 0;
+}
+
+:::mutex_unlock:return
+/ (self->mutex != 0) && !MATCH_FILTER(self->mutex) /
+{
+	/* Event was tracked for state correctness but suppressed by filters. */
 	self->lock_entry_ts[self->mutex] = 0;
 	self->lock_exit_ts[self->mutex] = 0;
 	self->unlock_entry_ts = 0;
